@@ -1,0 +1,532 @@
+# ===================================================================
+# Localization File for Security Bot (Language: English)
+# Version: 1.0
+# ===================================================================
+
+# === 1. Global UI Elements ===
+# Texts for buttons, menus, and common messages used across different modules.
+# -------------------------------------------------------------------
+ui:
+  button_approve: "Approve"
+  button_deny: "Deny"
+  button_ban_user: "Ban Permanently"
+  button_restore_roles: "Restore Roles"
+  button_keep_quarantined: "Keep in Quarantine"
+  button_close: "Close"
+  button_previous: "Previous"
+  button_next: "Next"
+  interaction_denied: "You cannot use these buttons."
+  pagination_page_indicator: "Page {current} of {total}"
+
+# === 2. System & General Messages ===
+# Errors, statuses, and other system-level texts.
+# -------------------------------------------------------------------
+system:
+  unknown_user: "Unknown User"
+  db_error: "An error occurred while working with the database."
+  unexpected_error: "❌ An unexpected error occurred while executing the command. The developer has been notified."
+  check_failure: "❌ You do not have permission to use this command."
+  reason_denied: "denied"
+  reason_timed_out: "did not respond (timed out)"
+  default_value_suffix: "` (default)`"
+  permissions:
+    administrator: "Administrator"
+    manage_channels: "Manage Channels"
+    manage_guild: "Manage Server"
+    manage_roles: "Manage Roles"
+    manage_webhooks: "Manage Webhooks"
+    ban_members: "Ban Members"
+    kick_members: "Kick Members"
+    mention_everyone: "Mention @everyone"
+
+# === 3. Module: Welcome & Help ===
+# Texts for the /help command and the welcome message upon joining a server.
+# -------------------------------------------------------------------
+welcome:
+  embed_title: "✅ Thank you for adding {bot_name}!"
+  embed_description: |
+    Hello! I am your security bot, **{bot_name}**. My main task is to protect your server, **{guild_name}**, from unauthorized actions and attacks.
+
+    For me to do my job effectively, please complete a few simple but very important steps:
+  field_roles_title: "⚠️ Crucial Step: Role Hierarchy"
+  field_roles_value: |
+    In order for me to control the actions of **all** members, including administrators, my role must be placed **as high as possible** in your server's role list.
+
+    **Please go to `Server Settings` > `Roles` and drag the `{bot_name}` role ABOVE the administrator and moderator roles.** The ideal position is at the very top of the list.
+
+    *This will allow me to revert dangerous actions and quarantine any offender, regardless of their permissions.*
+  field_setup_title: "🚀 Initial Setup"
+  field_setup_value: |
+    These commands are the key to the bot's full functionality.
+
+    **1. Quarantine Setup (REQUIRED)**
+    This is the most important command. It creates a special role where users suspected of attacking the server will be placed.
+    `/setup quarantine configure`
+
+    **2. Create Your First Backup (RECOMMENDED)**
+    Immediately after setup, create the first snapshot of your server. This is your recovery point in case of any trouble.
+    `/backup create`
+
+    **3. Check the Bot Whitelist**
+    If you have other trusted bots on your server, add them to the whitelist, or I might ban them.
+    `/botlist add`
+
+    **4. Set Language (Optional)**
+    By default, I respond in Russian (`RU`). If you want me to communicate in English, use this command:
+    `/setup language set`
+  field_moderation_title: "🛠️ Configure Moderation"
+  field_moderation_value: |
+    The bot is equipped with an advanced mute and warning system. For it to work correctly, please use the commands:
+    `/setup logs set` - to set a moderation log channel.
+    `/warns setup` - to configure auto-mutes for warnings.
+  field_telegram_title: "🔔 Get Alerts in Telegram"
+  field_telegram_value: |
+    You can set up instant notifications for all incidents directly to your Telegram. This is especially useful if you are not always on Discord.
+    `/setup telegram configure`
+  field_help_title: "ℹ️ Help & Audit"
+  field_help_value: "For a full list of commands, use `/help`. To see a summary of all your servers, DM me the `/my_servers` command."
+  author_info_title: " ‎"
+  author_info_value: "Creator: <@{owner_id}> | [Support Server]({invite_link})"
+  footer_text: "Your personal server guardian"
+
+help:
+  initial_title: "Security Bot Help Center"
+  initial_description: |
+    Hello! I'm your security bot. My job is to keep your server safe.
+    Use the menu below to learn more about my features and commands.
+  placeholder: "Select a category to view..."
+
+  category_setup:
+    label: "👋 Initial Setup"
+    title: "👋 Initial Setup"
+    description: |
+      These two commands are key to the bot's full functionality. It is highly recommended to configure them immediately after adding the bot to your server.
+
+      **1. Quarantine Setup (REQUIRED)**
+      This is the most important command. It creates a special `🚫 Quarantine` role where users suspected of attacking the server will be placed. Without this role, the protection system cannot isolate offenders.
+      `/setup quarantine configure`
+
+      **2. Language Setup**
+      By default, I respond in Russian (`RU`). If you want me to communicate in English, use this command:
+      `/setup language set`
+
+  category_management:
+    label: "⚙️ Management & Settings"
+    title: "⚙️ Management & Settings"
+    description: |
+      These commands will help you manage the bot and fine-tune its behavior.
+
+      **Backup System:**
+      • `/backup create` - Create a full snapshot of the server (roles, channels, perms, messages).
+      • `/backup list` - Show all available backups.
+      • `/backup restore` - Restore the server from a backup.
+      • `/backup delete` - Delete an unneeded backup.
+      • `/backup clone` - **(DANGEROUS!)** Clone the structure of another one of your servers onto this one. **All members will lose their roles!**
+
+      **Manage Bot Whitelist:**
+      • `/botlist add` - Add a trusted bot so I don't ban it.
+      • `/botlist remove` - Remove a bot from the whitelist.
+      • `/botlist list` - Show all bots on the whitelist.
+
+      **Manage Quarantine:**
+      • `/quarantine list` - Show everyone currently in quarantine, with options to ban them or restore their roles.
+      
+      **Direct Message Commands:**
+      • `/my_servers` - (DM the bot only) Shows a dashboard with a summary for all your servers.
+
+      **Fine-tune Anti-nuke:**
+      • `/setup antinuke configure` - Change the "threat scores" for different actions. For advanced users.
+      • `/setup antinuke view` - See the current score values.
+
+      **Configure Telegram Notifications:**
+      • `/setup telegram configure` - Set up sending critical notifications to your Telegram.
+      
+  category_moderation:
+    label: "🛠️ Moderation"
+    title: "🛠️ Moderation Commands"
+    description: |
+      These commands allow your moderators to maintain order on the server.
+
+      **Member Timeout (Mute):**
+      • `/mute [member]` - Timeout a member, preventing them from speaking or writing. Opens a convenient modal for duration and reason.
+      • `/unmute [member]` - Remove a timeout.
+      • `/muted` - Show a paginated list of all members currently in timeout.
+
+      **Warning System:**
+      • `/warns add [member]` - Issue a warning.
+      • `/warns list [member]` - Show a member's warning history.
+      • `/warns remove [member] [id]` - Remove a specific warning.
+      • `/warns setup` - Configure how many warns lead to an auto-mute and for how long.
+      • `/warns setup-lifetime` - Configure how many days until warnings expire.
+      • `/warns settings` - Show the current settings for the warning system.
+
+  category_concept:
+    label: "🛡️ How does the protection work?"
+    title: "🛡️ How does the protection work?"
+    description: |
+      My security system consists of two layers:
+
+      **1. Proactive Protection (Confirmations)**
+      When a moderator tries to perform a potentially dangerous action (like granting a role with administrator rights or creating a webhook), I immediately revert the action and send you a direct message requesting confirmation. Only after your approval will the action be executed. This prevents accidental or malicious changes.
+
+      **2. Reactive Protection (Anti-nuke)**
+      I monitor rapid, mass actions characteristic of crash raids (mass channel deletion, bans, role creation). Each such action adds "threat points" to the moderator. If they accumulate a critical number of points in a short time, I automatically place them in quarantine, stripping them of all permissions and notifying you. This stops an attack even if you are offline.
+
+      This two-layer system provides comprehensive protection for your server.
+
+# === 4. Module: Security System ===
+# Texts for confirmations, quarantine, anti-nuke, and alerts.
+# -------------------------------------------------------------------
+security:
+  # Common Embed Titles
+  embed_titles:
+    confirm_required: "Action Confirmation Required"
+    incident_report: "🚨 Incident Decision Required"
+    action_approved: "✅ Action Approved"
+    action_denied: "❌ Action Denied"
+    action_timeout: "⏰ Action Denied (Timeout)"
+    roles_restored: "✅ Roles Restored"
+    user_banned: "🔨 User Banned"
+
+  # Quarantine Reasons
+  reasons:
+    channel_delete: "mass channel deletion"
+    channel_create: "mass channel creation"
+    role_create: "mass role creation"
+    ban: "mass banning members"
+    kick: "mass kicking members"
+    webhook_spam: "webhook creation spam"
+    log_channel_deleted: "Deletion of a critical log channel"
+
+  # Logs and Messages
+  quarantine_log: "🚨 **ATTACK DETECTED!** User {user_mention} has exceeded the threat threshold (scored {score:.2f}/{threshold} points) and has been quarantined."
+  quarantine_fallback_ban_log: "🚨 **CRITICAL ATTACK!** User {user_mention} attacked the server, but the quarantine mechanism was compromised. **As a last resort, the attacker has been banned.**"
+  quarantine_config_missing_log: "⚠️ **ATTACK!** User {user_mention} is performing malicious actions, but I cannot stop them! The quarantine role is not configured. Use `/setup quarantine`."
+  action_cancelled_footer: "No action was taken. The menu has been closed."
+  dm_permission_error_log: "⚠️ **Error!** Could not send a DM to the Server Owner for confirmation. The action has been cancelled."
+  
+  # Owner Confirmations
+  confirm:
+    quarantine:
+      description: "User **{user_mention}** was automatically quarantined for: **{reason}**. All their roles have been removed and saved.\n\nWhat action should be taken?"
+      ban_log: "✅ User **{user_mention}** has been banned by the Owner's decision."
+      restore_log: "✅ Roles for user **{user_mention}** have been successfully restored."
+      keep_log: "ℹ️ User **{user_mention}** has been kept in quarantine for further investigation."
+    role_update:
+      log: "🚨 **DANGEROUS MODIFICATION DETECTED!** User {user_mention} modified the `{role_name}` role, adding dangerous permissions. The change has been reverted."
+      description: "User **{user_mention}** is attempting to modify the **`{role_name}`** role by adding dangerous permissions. **The change has been temporarily reverted.**\n\nAllow this action?"
+    webhook_create:
+      description: "User **{creator_mention}** is trying to create a webhook named **`{webhook_name}`** in the {channel_mention} channel.\n\n**For security purposes, the webhook has been immediately deleted.** Allow the user to create it again?"
+      creator_request_sent: "ℹ️ Creating the webhook **{webhook_name}** in {channel_mention} requires approval from the Server Owner. I have sent them a request and will notify you of the decision."
+      creator_request_denied: "❌ The Server Owner has denied your request to create the webhook **{webhook_name}**."
+      creator_request_approved: "✅ The Server Owner has approved your request to create the webhook **{webhook_name}**! You now have **1 hour** to create it in the same channel."
+    generic:
+      permissions_field: "Permissions to be added:"
+      role_approved_log: "✅ The Owner has **approved** giving the role **`{role_name}`** to **{user_mention}** (initiator: **{moderator_mention}**)."
+      role_denied_log: "❌ The Owner has **{reason}** giving the role **`{role_name}`** to **{user_mention}** (initiator: **{moderator_mention}**)."
+      webhook_denied_log: "❌ The Owner has **{reason}** the creation of webhook **`{webhook_name}`** (initiator: **{creator_mention}**)."
+
+  # Telegram Alerts
+  telegram:
+    critical_config: |
+      ‼️ <b>CRITICAL CONFIGURATION ERROR ON SERVER: {guild_name}</b>
+      User {user_name} ({user_id}) is performing malicious actions, but I cannot stop them!
+      <b>PROBLEM:</b> The quarantine role is not configured.
+      Use the <code>/setup quarantine configure</code> command to fix this.
+    quarantine: |
+      🚨 <b>SERVER ATTACK: {guild_name}</b> 🚨
+      👤 <b>User:</b> {user_name} ({user_id})
+      🔒 <b>Status:</b> QUARANTINED
+      ❓ <b>Reason:</b> {reason}
+      👉 Check your Discord DMs to make a decision.
+    role_grant: |
+      ⚠️ <b>Dangerous Role Assignment on server: {guild_name}</b>
+      🔧 <b>Moderator:</b> {moderator_str}
+      🎯 <b>Target:</b> {target_user_name} ({target_user_id})
+      🏷️ <b>Role:</b> <code>{role_name}</code>
+      The action has been reverted and is awaiting your confirmation in Discord DMs.
+    role_update: |
+      ⚠️ <b>Dangerous Role Modification on server: {guild_name}</b>
+      🔧 <b>Moderator:</b> {moderator_str}
+      🏷️ <b>Role:</b> <code>{role_name}</code>
+      ➕ <b>Added Permissions:</b> {permissions_str}
+      The change has been reverted and is awaiting your confirmation in Discord DMs.
+    webhook: |
+      🚨 <b>Webhook Creation Attempt on server: {guild_name}</b>
+      👤 <b>User:</b> {user_name} ({user_id})
+      🔗 <b>Webhook Name:</b> <code>{webhook_name}</code>
+      #️⃣ <b>Channel:</b> <code>#{channel_name}</code>
+      👉 Check your Discord DMs to <b>approve</b> or <b>deny</b> the action.
+
+# === 5. Module: Backup System ===
+# Texts for the /backup commands and system backups.
+# -------------------------------------------------------------------
+backup:
+  # Server Backup Management Commands
+  server:
+    create_started: "⏳ Starting to create the backup **`{backup_name}`**. This may take some time... I will notify you when it's complete."
+    create_already_exists: "❌ Error: A backup with the name **`{backup_name}`** already exists. Please choose a different name or delete the old one."
+    create_invalid_name: "❌ Error: The backup name can only contain letters, numbers, hyphens, and underscores."
+    create_limit_reached: "❌ Error: You have reached the limit of **{limit}** backups for this server. Delete an old backup to create a new one."
+    create_success_title: "✅ Backup `{backup_name}` created successfully!"
+    create_success_desc: |
+      **Included in the backup:**
+      {options_list}
+      
+      You can view all your backups using the `/backup list` command.
+    list_no_backups: "ℹ️ No backups have been created for this server yet."
+    list_title: "Backups for {guild_name}"
+    list_entry: "**`{backup_name}`** (created {timestamp})"
+    delete_success: "🗑️ Backup **`{backup_name}`** has been successfully deleted."
+    delete_not_found: "❌ Could not find a backup named **`{backup_name}`** to delete."
+    delete_confirm_title: "Confirm Deletion"
+    delete_confirm_desc: "Are you sure you want to permanently delete the backup **`{backup_name}`**? This action cannot be undone."
+    restore_not_found: "❌ The backup you are trying to restore could not be found."
+    restore_confirm_title: "⚠️ DANGEROUS ACTION CONFIRMATION ⚠️"
+    restore_confirm_desc: |
+      You are about to restore the server from the backup **`{backup_name}`**.
+
+      **THIS ACTION WILL DELETE ALL CURRENT ROLES AND CHANNELS ON THE SERVER!**
+
+      This operation is irreversible and may take a long time. Make sure you understand the risks.
+    restore_started: "⏳ Starting to restore the server from backup **`{backup_name}`**. Please do not make any manual changes. I will notify you when the process is complete."
+    restore_failed: "❌ A critical error occurred during the restoration. The server may be in an unstable state. Error: `{error}`"
+    clone_confirm_title: "⚠️ SERVER CLONE CONFIRMATION ⚠️"
+    clone_confirm_desc: |
+      You are about to **COMPLETELY REPLACE** the structure of the current server **`{target_server_name}`** with the structure from the backup **`{backup_name}`** from the server **`{source_server_name}`**.
+
+      **THIS ACTION IS IRREVERSIBLE AND WILL RESULT IN:**
+      • The **DELETION OF ALL** current roles and channels.
+      • The **REMOVAL OF ALL** roles from **ALL** server members. It will be impossible to restore them.
+
+      Ensure you understand the risks.
+    clone_started: "⏳ Starting the cloning process. Please do not make any manual changes. I will notify you when the process is complete."
+    clone_success: "✅ The server structure has been successfully cloned."
+    clone_failed: "❌ A critical error occurred during cloning. The server may be in an unstable state. Error: `{error}`"
+    options:
+      structure: "Structure (roles and channels)"
+      messages: "Messages (up to {limit} per channel)"
+    progress:
+      dm_create_start: "⏳ Starting to create backup **`{backup_name}`** for server **{guild_name}**..."
+      messages_backup: "⏳ Gathering structure... Now starting the slow process of backing up messages. This could take anywhere from a few minutes to an hour depending on your server's activity. Please wait for the final notification."
+      restore_step_start: "🚀 Starting to restore server **{guild_name}** from backup `{backup_name}`."
+      restore_step_1: "Step 1/7: Deleting old channels..."
+      restore_step_2: "Step 2/7: Deleting old roles..."
+      restore_step_3: "Step 3/7: Creating new roles..."
+      restore_step_4: "Step 4/7: Setting role hierarchy..."
+      restore_step_5: "Step 5/7: Assigning roles back to members..."
+      restore_step_6: "Step 6/7: Restoring channels and permissions..."
+      restore_step_7: "Step 7/7: Starting the slow process of restoring messages..."
+      restore_final_success: "✅ Restoration of server **{guild_name}** has completed successfully!"
+      restore_final_fail: "❌ Restoration of server **{guild_name}** failed due to a critical error: `{error}`"
+  
+  # System Backup Management Commands
+  system:
+    now_started: "✅ Acknowledged! Starting the full backup process. You will receive a DM report upon completion."
+    status_message: "🕒 The next automatic backup is scheduled in **{hours}h {minutes}m**."
+    task_already_running: "⚠️ A backup process is already running. Please wait for it to complete."
+    report:
+      title: "📄 Backup Report"
+      data_archive_field: "Data Archive"
+      code_archive_field: "Code Archive"
+      status_success: "✅ Successfully created and uploaded"
+      status_skipped: "⏭️ Skipped (not the scheduled day)"
+      status_failed: "❌ Failed (see log file for details)"
+      footer: "Server: {guild_name}"
+      
+# === 6. Module: Moderation ===
+# Texts for /mute, /unmute, /warns commands and related features.
+# -------------------------------------------------------------------
+moderation:
+  # Mutes
+  mute:
+    modal_title: "Member Timeout"
+    modal_duration_label: "Duration (10m, 1h, 7d)"
+    modal_duration_placeholder: "Empty = max duration (28 days)"
+    modal_reason_label: "Reason"
+    modal_reason_placeholder: "e.g., 'Violation of chat rules'"
+    error_self: "You cannot mute yourself."
+    error_bot: "I cannot mute myself."
+    error_admin: "❌ You cannot timeout an administrator."
+    error_hierarchy: "❌ Error: I don't have sufficient permissions to time out this member. Their role might be higher than mine."
+    error_max_duration: "❌ The timeout duration cannot exceed 28 days."
+    error_already_muted_title: "ℹ️ Member Already Timed Out"
+    error_already_muted_description: |
+      **Member:** {member_mention} is already in timeout.
+
+      **By:** {moderator_mention}
+      **Reason:** {reason}
+      **Ends:** {end_timestamp}
+    embed_title: "✅ Member Timed Out"
+    embed_description: "**Member:** {member_mention}\n**Moderator:** {moderator_mention}\n**Reason:** {reason}\n**Ends:** {end_timestamp}"
+    dm_title: "You have been timed out on the server {guild_name}"
+    dm_description: |
+      **Moderator:** {moderator_mention}
+      **Reason:** {reason}
+      **Timeout ends:** {end_timestamp}
+      
+      If you believe this action was a mistake, you can appeal to the server owner <@{owner_id}>.
+    auto_dm_title: "You have been automatically timed out on the server {guild_name}"
+    auto_dm_description: |
+      You have received your **{warn_count}th** (maximum) warning and have been automatically timed out.
+      
+      **Reason for the last warning:** {reason}
+      **Timeout ends:** {end_timestamp}
+      
+      If you believe this action was a mistake, you can appeal to the server owner <@{owner_id}>.
+
+  unmute:
+    error_not_muted: "ℹ️ Member {member_mention} is not currently in timeout."
+    embed_title: "✅ Timeout Removed"
+    embed_description: "**Member:** {member_mention}\n**Moderator:** {moderator_mention}"
+    dm_title: "Your timeout has been removed on the server {guild_name}"
+    dm_description: "You can now communicate in text and voice channels again. Please follow the server rules."
+  
+  muted_list:
+    title: "Timed Out Members on the Server"
+    empty: "There are currently no members in timeout."
+    entry: |
+      **{index}. Member:** {member_mention}
+      **Moderator:** {moderator_mention}
+      **Reason:** {reason}
+      **Ends:** {end_timestamp}
+
+  # Warnings
+  warn:
+    modal_title: "Issue a Warning"
+    modal_reason_label: "Reason for the warning"
+    modal_reason_placeholder: "e.g., 'Insults in chat'"
+    error_is_mod: "ℹ️ You cannot issue a warning to a moderator or an administrator."
+    embed_title: "⚠️ Warning Issued"
+    embed_description: "**Member:** {member_mention}\n**Moderator:** {moderator_mention}\n**Reason:** {reason}\n**Total Warnings:** {warn_count}/{warn_threshold}"
+    auto_mute_embed_title: "🚨 Automatic Timeout"
+    auto_mute_embed_description: "Member {member_mention} received their **{warn_count}th** warning and has been automatically timed out for **{duration}**."
+    dm_title: "You have received a warning on the server {guild_name}"
+    dm_description: |
+      **Moderator:** {moderator_mention}
+      **Reason:** {reason}
+      
+      This is your **{warn_count}th** warning. Upon reaching **{warn_threshold}** warnings, you will be automatically timed out.
+  
+  warns_list:
+    title: "Warnings for {member_name}"
+    no_warns: "✅ Member {member_mention} has no active warnings."
+    entry: "**#{index}.** Issued by {moderator_mention} ({timestamp}) {status}\n**Reason:** `{reason}`"
+    status_archived: "(Archived)"
+    status_expired: "(Expired)"
+
+  warns_remove:
+    success_title: "✅ Warning Removed"
+    success_desc: "Warning **#{incident_index}** has been removed from {member_mention} by moderator {moderator_mention}."
+    not_found: "❌ A warning with number `{incident_index}` for this member was not found."
+    
+  my_warnings:
+    title: "My Warnings"
+    no_warns: "✅ You have no active or archived warnings on this server."
+
+  # Moderation Logs
+  log:
+    no_reason: "No reason specified"
+    manual_unmute_title: "ℹ️ Manual Timeout Removal"
+    manual_unmute_desc: "**Member:** {target_mention}\n**Moderator:** {moderator_mention}"
+    auto_unmute_title: "✅ Timeout Expired"
+    auto_unmute_desc: "**Member:** {target_mention}\nThe timeout has expired automatically."
+
+# === 7. Module: Management & Setup ===
+# Texts for /setup, /botlist, /quarantine, and /my_servers commands.
+# -------------------------------------------------------------------
+management:
+  botlist:
+    select_placeholder: "Select bots to remove..."
+    button_label: "Remove Selected"
+    add_success: "✅ The bot **{user_name}** (`{bot_id}`) has been added to the whitelist."
+    add_unbanned: "It has also been automatically unbanned (if it was on the ban list)."
+    remove_success: "🗑️ The bot with ID `{bot_id}` has been removed from the whitelist."
+    remove_not_found: "ℹ️ A bot with ID `{bot_id}` was not found in the whitelist."
+    list_empty: "ℹ️ The whitelist of allowed bots for this server is empty."
+    list_title: "Allowed Bots on {guild_name}"
+    add_not_found: "❌ Could not find a user or bot with ID `{bot_id}`. Please ensure the ID is correct."
+    add_is_not_a_bot: "⚠️ The user **{user_name}** (`{bot_id}`) is not a bot and cannot be added to this list."
+    add_already_exists: "ℹ️ The bot **{user_name}** (`{bot_id}`) is already in the whitelist on this server."
+    remove_multi_success: "✅ Successfully removed the following bots:"
+    remove_nothing_selected: "Please select at least one bot from the list to remove."
+
+  quarantine:
+    select_placeholder: "Select a user for action..."
+    list_title: "Users in Quarantine on {guild_name}"
+    list_empty: "ℹ️ There are currently no users in quarantine."
+    list_entry: "• {user_mention} (`{user_id}`) - quarantined on {timestamp}"
+    action_already_taken: "An action regarding this user has already been taken."
+    no_user_found: "❌ Could not find a user with ID {user_id} on this server."
+    unquarantine_success: "✅ User {user_mention} has been successfully released from quarantine. Their roles have been restored."
+
+setup:
+  language:
+    success: "✅ The language for this server has been successfully set to **{language_name}**."
+    
+  quarantine:
+    role_found: "✅ The `🚫 Quarantine` role already exists and has been successfully configured for use."
+    role_created: "✅ The `🚫 Quarantine` role was not found, so I created it and configured it for use."
+    role_perms_error: "⚠️ The role has been configured, but I don't have permission to assign it! Please move my role above the `🚫 Quarantine` role."
+    role_deleted_dm: "⚠️ **Attention!** The quarantine role on your server **{guild_name}** has been manually deleted. The protection system can no longer isolate offenders! Please configure it again using the `/setup quarantine configure` command."
+    role_renamed_dm: "ℹ️ **Notice:** The quarantine role on your server **{guild_name}** was renamed from `{old_name}` to `{new_name}`. I have automatically updated my settings."
+
+  telegram:
+    success: "✅ Telegram settings have been saved successfully. The bot token is encrypted."
+    test_success: "✅ Test message sent successfully!"
+    test_fail: "❌ Failed to send the test message. Please check the bot token and ensure you have started a conversation with it. Error: {error}"
+    not_configured: "ℹ️ Telegram notifications are not yet configured. Use `/setup telegram configure`."
+    remove_success: "🗑️ Telegram settings for this server have been successfully removed."
+    test_message: "This is a test message from your Security bot!"
+
+  antinuke:
+    settings_title: "Anti-nuke Settings for {guild_name}"
+    settings_desc: "Current values are shown here. '`(default)`' means the global setting is being used."
+    field_threshold: "Trigger Threshold"
+    field_decay: "Threat Decay per sec."
+    field_channel_del: "Score: channel delete"
+    field_channel_add: "Score: channel create"
+    field_role_add: "Score: role create"
+    field_webhook_add: "Score: webhook create"
+    field_ban: "Score: ban"
+    field_kick: "Score: kick"
+    configure_success: "✅ Anti-nuke settings have been updated successfully. New values will take effect immediately."
+    reset_success: "✅ The setting `{setting_name}` has been successfully reset to its default value."
+    reset_fail: "❌ Failed to reset the setting `{setting_name}`."
+    
+  backup_messages:
+    limit_success: "✅ The message limit for backups has been successfully set to **{limit}**."
+    
+  logs:
+    set_success: "✅ Channel {channel_mention} has been successfully set as the log channel."
+    disabled_success: "✅ Channel logging has been disabled."
+    recreated_message: "⚠️ The previous log channel was deleted. This channel was automatically created to continue logging. The initiator of the incident has been quarantined."
+    owner_deleted_dm_title: "ℹ️ Log Channel Information"
+    owner_deleted_dm_desc: |
+      Hello! You have deleted the log channel **`#{channel_name}`** on your server **{guild_name}**.
+      
+      I have automatically cleared this setting in my database. Moderation logging is now suspended.
+      
+      To re-enable logging, please create a new channel and use the `/setup logs set` command.
+    user_deleted_dm_title: "🚨 CRITICAL SECURITY INCIDENT"
+    user_deleted_dm_desc: |
+      On your server **{guild_name}**:
+      
+      **What happened:** Member {user_mention} **deleted** the configured log channel.
+      **Actions taken:**
+      1. The offender has been immediately **placed in quarantine**.
+      2. The bot has automatically **created a new private log channel**: {new_channel_mention}.
+      
+      All future logs will be sent to the new channel. Please review its permissions.
+
+  warns:
+    setup_success: "✅ Warning system settings updated: **{count}** warn(s) until a mute for **{duration}**."
+    lifetime_success: "✅ Warning lifetime has been set to **{days}** days."
+    settings_title: "Warning Settings on the Server"
+    field_threshold: "Auto-mute Threshold"
+    field_duration: "Auto-mute Duration"
+    field_lifetime: "Warning Lifetime"
+    value_count: "{count}"
+    value_days: "{count} days"
+    value_disabled: "Disabled"
+    value_not_set: "Not set (default)"

@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+*.env
+
+# Наше
+backups/
+logs/
+
+# Файлы учетных данных Discord бота
+apps/discord_bot/credentials.json
+apps/discord_bot/service_account.json
+apps/discord_bot/token.json

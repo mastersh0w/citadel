@@ -1,0 +1,534 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 14px;
+  --background: #ffffff;
+  --foreground: oklch(0.145 0 0);
+  --card: #ffffff;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #030213;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.0058 264.53);
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #030213;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: #111827;
+  --foreground: #f9fafb;
+  --card: #1f2937;
+  --card-foreground: #f9fafb;
+  --popover: #1f2937;
+  --popover-foreground: #f9fafb;
+  --primary: #3b82f6;
+  --primary-foreground: #f9fafb;
+  --secondary: #374151;
+  --secondary-foreground: #f9fafb;
+  --muted: #374151;
+  --muted-foreground: #9ca3af;
+  --accent: #374151;
+  --accent-foreground: #f9fafb;
+  --destructive: #ef4444;
+  --destructive-foreground: #f9fafb;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --border: #374151;
+  --input: #374151;
+  --input-background: #374151;
+  --switch-background: #4b5563;
+  --ring: #3b82f6;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: #3b82f6;
+  --chart-2: #22c55e;
+  --chart-3: #f59e0b;
+  --chart-4: #ef4444;
+  --chart-5: #8b5cf6;
+  --radius: 0.625rem;
+  --sidebar: #1f2937;
+  --sidebar-foreground: #f9fafb;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #f9fafb;
+  --sidebar-accent: #374151;
+  --sidebar-accent-foreground: #f9fafb;
+  --sidebar-border: #374151;
+  --sidebar-ring: #3b82f6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+  }
+
+
+
+  /* Ensure proper text wrapping and prevent text overflow */
+  * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Prevent text from being too small on mobile */
+  @media (max-width: 768px) {
+    html {
+      font-size: max(14px, 3.5vw);
+    }
+  }
+
+  /* Ensure buttons and interactive elements are properly visible on mobile */
+  @media (max-width: 768px) {
+    button, [role="button"], .button, [data-slot="button"] {
+      position: relative;
+      z-index: 10;
+      min-height: 44px; /* Minimum touch target size */
+      touch-action: manipulation; /* Prevent double-tap zoom */
+    }
+
+    /* Ensure form elements are visible */
+    input, select, textarea {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Fix any potential overlay issues */
+    main {
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Ensure dialogs and dropdowns work properly */
+    [role="dialog"], [role="menu"], [role="listbox"] {
+      z-index: 100;
+    }
+  }
+
+  /* Ensure mobile touch targets are appropriate size */
+  @media (max-width: 768px) and (pointer: coarse) {
+    button:not(.compact), [role="button"]:not(.compact), [data-slot="button"]:not(.compact) {
+      min-height: 48px;
+      padding: 12px 16px;
+    }
+  }
+
+  /* Prevent any potential visibility issues */
+  button, [role="button"], [data-slot="button"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Collapsible animations for mobile sidebar */
+  [data-slot="collapsible-content"] {
+    overflow: hidden;
+    transition: height 0.2s ease-out;
+  }
+
+  [data-slot="collapsible-content"][data-state="open"] {
+    animation: slideDown 0.2s ease-out;
+  }
+
+  [data-slot="collapsible-content"][data-state="closed"] {
+    animation: slideUp 0.2s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      height: var(--radix-collapsible-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  /* Ensure switches don't stretch on mobile - minimal fixes only */
+  [data-slot="switch"] {
+    flex-shrink: 0 !important;
+    width: 2rem !important; /* w-8 = 32px = 2rem */
+    height: 1.15rem !important; /* h-[1.15rem] from original */
+    min-width: 2rem !important;
+    min-height: 1.15rem !important;
+    max-width: 2rem !important;
+    max-height: 1.15rem !important;
+  }
+
+  [data-slot="switch-thumb"] {
+    width: 1rem !important; /* size-4 = 16px = 1rem */
+    height: 1rem !important;
+    min-width: 1rem !important;
+    min-height: 1rem !important;
+    max-width: 1rem !important;
+    max-height: 1rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Mobile-specific Switch adjustments */
+  @media (max-width: 768px) {
+    /* Keep switches properly sized on mobile */
+    [data-slot="switch"] {
+      flex-shrink: 0 !important;
+    }
+    
+    [data-slot="switch-thumb"] {
+      flex-shrink: 0 !important;
+    }
+  }
+
+  /* Prevent layout issues on mobile */
+  @media (max-width: 768px) {
+    .space-y-4 > * + * {
+      margin-top: 1rem !important;
+    }
+
+    .space-y-6 > * + * {
+      margin-top: 1.5rem !important;
+    }
+
+    /* Prevent overflow */
+    .text-left {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Better mobile cards */
+    .card {
+      margin: 0.5rem !important;
+      width: calc(100% - 1rem) !important;
+    }
+
+    /* Flex containers on mobile */
+    .flex.items-center.justify-between {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* Badge wrapping */
+    .badge {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Proper grid on mobile */
+    .grid-cols-2 {
+      grid-template-columns: 1fr !important;
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: 1fr !important;
+    }
+
+    .grid-cols-4 {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Mobile tabs replacement with dropdown */
+    [role="tablist"] {
+      display: none !important;
+    }
+
+    /* Mobile dropdown for tabs replacement */
+    .mobile-tabs-dropdown {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-bottom: 1rem;
+    }
+
+    .mobile-tabs-dropdown [data-slot="select-trigger"] {
+      height: 48px;
+      font-size: 16px;
+    }
+
+    /* Basic checkbox fixes for remaining usage */
+    [data-slot="checkbox"], 
+    button[role="checkbox"],
+    input[type="checkbox"] {
+      flex-shrink: 0 !important;
+      width: 1rem !important;
+      height: 1rem !important;
+      min-width: 1rem !important;
+      min-height: 1rem !important;
+      max-width: 1rem !important;
+      max-height: 1rem !important;
+    }
+
+    /* Better mobile dialog content spacing */
+    [role="dialog"] .space-y-6 > * + * {
+      margin-top: 1.5rem !important;
+    }
+
+    /* Mobile-specific checkbox label improvements */
+    [role="dialog"] label {
+      font-size: 14px !important;
+      line-height: 1.4 !important;
+    }
+
+    [role="dialog"] .text-xs {
+      font-size: 12px !important;
+      line-height: 1.3 !important;
+    }
+
+    /* Improve dialog content on mobile */
+    [role="dialog"] .space-y-2 > * + * {
+      margin-top: 0.5rem !important;
+    }
+
+    /* Better dialog button spacing on mobile */
+    [role="dialog"] .flex.justify-end.gap-3 {
+      gap: 0.75rem !important;
+    }
+
+    [role="dialog"] .flex.justify-end.gap-3 button {
+      min-height: 44px !important;
+      padding: 0.75rem 1rem !important;
+    }
+
+    /* Dialog specific improvements */
+    [data-slot="dialog-content"] {
+      max-height: 90vh !important;
+      overflow-y: auto !important;
+    }
+
+    [data-slot="dialog-content"] .space-y-6 {
+      padding-bottom: 1rem;
+    }
+
+    /* Dialog switch container fixes */
+    [role="dialog"] .flex.items-center.justify-between {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 1rem !important;
+    }
+
+    [role="dialog"] .flex.items-center.justify-between > div:first-child {
+      flex: 1 !important;
+      min-width: 0 !important;
+    }
+
+    [role="dialog"] .flex.items-center.justify-between > *:last-child {
+      flex-shrink: 0 !important;
+    }
+
+    /* Switch label spacing in dialogs */
+    [role="dialog"] .space-y-0\.5 > * + * {
+      margin-top: 0.125rem !important;
+    }
+
+    [role="dialog"] .space-y-0\.5 label {
+      font-size: 14px !important;
+      line-height: 1.4 !important;
+      font-weight: 500 !important;
+    }
+
+    [role="dialog"] .space-y-0\.5 p {
+      font-size: 12px !important;
+      line-height: 1.3 !important;
+      color: var(--color-muted-foreground) !important;
+    }
+
+    /* Sidebar width on mobile */
+    .w-80 {
+      width: 85vw !important;
+      max-width: 320px !important;
+    }
+
+    /* Mobile sidebar scrolling */
+    .fixed.left-0.top-0.h-full {
+      height: 100vh !important;
+      height: 100dvh !important;
+      overflow: hidden;
+    }
+
+    .fixed.left-0.top-0.h-full .flex.h-full.flex-col {
+      height: 100% !important;
+      overflow: hidden;
+    }
+
+    /* Prevent content overflow */
+    .min-w-0 {
+      min-width: 0 !important;
+      overflow: hidden;
+    }
+
+    /* Form elements */
+    .space-y-2 > * + * {
+      margin-top: 0.5rem !important;
+    }
+
+    /* Tables scroll horizontally */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      min-width: 600px;
+    }
+
+    /* Alert padding */
+    .alert {
+      padding: 0.75rem !important;
+    }
+
+    /* Button sizes */
+    .btn-group {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .btn-group.horizontal {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
